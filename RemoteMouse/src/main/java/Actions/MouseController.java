@@ -3,10 +3,12 @@
  */
 package Actions;
 
+import java.awt.AWTException;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.Robot;
 import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 
 /**
  * @author 2dam3
@@ -14,6 +16,15 @@ import java.awt.event.InputEvent;
  */
 public class MouseController {
 	
+	final int movement = 100;
+	public MouseController() {
+		try {
+			Robot r = new Robot();
+		} catch (AWTException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	/* Los movimientos de ratón se relacionan
 	 * con los puntos cardinales:
 	 * North - Arriba
@@ -26,7 +37,7 @@ public class MouseController {
 			Robot r = new Robot();
 			// get initial location
             Point p = MouseInfo.getPointerInfo().getLocation();
-            r.mouseMove(p.x, p.y - 100);
+            r.mouseMove(p.x, p.y - movement);
             //System.out.println(p.x + " , " + p.y);
 		}
 		catch (Exception e){
@@ -39,7 +50,7 @@ public class MouseController {
 			Robot r = new Robot();
 			// get initial location
             Point p = MouseInfo.getPointerInfo().getLocation();
-            r.mouseMove(p.x - 100, p.y - 100);
+            r.mouseMove(p.x - movement, p.y - movement);
             //System.out.println(p.x + " , " + p.y);
 		}
 		catch (Exception e){
@@ -52,7 +63,7 @@ public class MouseController {
 			Robot r = new Robot();
 			// get initial location
             Point p = MouseInfo.getPointerInfo().getLocation();
-            r.mouseMove(p.x - 100, p.y);
+            r.mouseMove(p.x - movement, p.y);
             //System.out.println(p.x + " , " + p.y);
 		}
 		catch (Exception e){
@@ -65,7 +76,7 @@ public class MouseController {
 			Robot r = new Robot();
 			// get initial location
             Point p = MouseInfo.getPointerInfo().getLocation();
-            r.mouseMove(p.x - 100, p.y + 100);
+            r.mouseMove(p.x - movement, p.y + movement);
             //System.out.println(p.x + " , " + p.y);
 		}
 		catch (Exception e){
@@ -78,7 +89,7 @@ public class MouseController {
 			Robot r = new Robot();
 			// get initial location
             Point p = MouseInfo.getPointerInfo().getLocation();
-            r.mouseMove(p.x, p.y + 100);
+            r.mouseMove(p.x, p.y + movement);
             //System.out.println(p.x + " , " + p.y);
 		}
 		catch (Exception e){
@@ -91,7 +102,7 @@ public class MouseController {
 			Robot r = new Robot();
 			// get initial location
             Point p = MouseInfo.getPointerInfo().getLocation();
-            r.mouseMove(p.x + 100, p.y + 100);
+            r.mouseMove(p.x + movement, p.y + movement);
             //System.out.println(p.x + " , " + p.y);
 		}
 		catch (Exception e){
@@ -104,7 +115,7 @@ public class MouseController {
 			Robot r = new Robot();
 			// get initial location
             Point p = MouseInfo.getPointerInfo().getLocation();
-            r.mouseMove(p.x + 100, p.y);
+            r.mouseMove(p.x + movement, p.y);
             //System.out.println(p.x + " , " + p.y);
 		}
 		catch (Exception e){
@@ -117,7 +128,7 @@ public class MouseController {
 			Robot r = new Robot();
 			// get initial location
             Point p = MouseInfo.getPointerInfo().getLocation();
-            r.mouseMove(p.x + 100, p.y - 100);
+            r.mouseMove(p.x + movement, p.y - movement);
             //System.out.println(p.x + " , " + p.y);
 		}
 		catch (Exception e){
@@ -156,6 +167,17 @@ public class MouseController {
 			Robot r = new Robot();
 			r.mousePress(InputEvent.BUTTON3_DOWN_MASK);
 			r.mouseRelease(InputEvent.BUTTON3_DOWN_MASK);
+		}
+		catch (Exception e){
+			System.err.println(e.getStackTrace());
+		}
+	}
+	
+	public void presskeyboard(String key) {
+		try {
+			Robot r = new Robot();
+			r.mousePress(KeyEvent.VK_A);
+			r.mouseRelease(KeyEvent.VK_A);
 		}
 		catch (Exception e){
 			System.err.println(e.getStackTrace());
