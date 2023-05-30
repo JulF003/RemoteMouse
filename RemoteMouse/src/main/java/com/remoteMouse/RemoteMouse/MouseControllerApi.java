@@ -4,11 +4,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import Actions.MouseController;
+import hexOSpell.Hive8;
 
 @RestController
 public class MouseControllerApi {
 
 	MouseController mc = new MouseController();
+	Hive8 speller = new Hive8();
+	int mode = 1; // modo 1 = ratón; modo 2 = hexOSpell
 	/* Los movimientos de ratón se relacionan
 	 * con los puntos cardinales:
 	 * North - Arriba
@@ -19,18 +22,25 @@ public class MouseControllerApi {
 	
 	@GetMapping("/remoteMouse")
 	public String Description() {
+		mode = 1;
 		return "This is an api made for remote control of mouse actions.";
 	}
 	
 	@GetMapping("/remoteMouse/north")
 	public String North() {
-		mc.moveNorth();
+		if(mode == 1)
+			mc.moveNorth();
+		else
+			speller.moveNorth();
 		return "North";
 	}
 	
 	@GetMapping("/remoteMouse/northWest")
 	public String NorthWest() {
-		mc.moveNorthWest();
+		if(mode == 1)
+			mc.moveNorthWest();
+		else
+			speller.moveNorthWest();
 		return "NorthWest";
 	}
 	
@@ -42,19 +52,28 @@ public class MouseControllerApi {
 	
 	@GetMapping("/remoteMouse/southWest")
 	public String SouthWest() {
-		mc.moveSouthWest();
+		if(mode == 1)
+			mc.moveSouthWest();
+		else
+			speller.moveSouthWest();
 		return "SouthWest";
 	}
 	
 	@GetMapping("/remoteMouse/south")
 	public String South() {
-		mc.moveSouth();
+		if(mode == 1)
+			mc.moveSouth();
+		else
+			speller.moveSouth();
 		return "South";
 	}
 	
 	@GetMapping("/remoteMouse/southEast")
 	public String SouthEast() {
-		mc.moveSouthEast();
+		if(mode == 1)
+			mc.moveSouthEast();
+		else
+			speller.moveSouthEast();
 		return "SouthEast";
 	}
 	
@@ -66,14 +85,20 @@ public class MouseControllerApi {
 	
 	@GetMapping("/remoteMouse/northEast")
 	public String NorthEast() {
-		mc.moveNorthEast();
+		if(mode == 1)
+			mc.moveNorthEast();
+		else
+			speller.moveNorthEast();
 		return "NorthEast";
 	}
 	
 	//Click Izquierdo
 	@GetMapping("/remoteMouse/lclick")
 	public String LClick() {
-		mc.keyLeft();
+		if(mode == 1)
+			mc.keyLeft();
+		else
+			speller.Click();
 		return "Left Click";
 	}
 	
@@ -89,5 +114,19 @@ public class MouseControllerApi {
 	public String RClick() {
 		mc.keyRight();
 		return "Right Click";
+	}
+	
+	//Cambio Modo
+	@GetMapping("/remoteMouse/changemode")
+	public String changeMode() {
+		if(mode == 1) {
+			speller.launch();
+			mode = 2;
+			}
+		else {
+			speller.close();
+			mode = 1;
+			}
+		return "Mode Changed";
 	}
 }
